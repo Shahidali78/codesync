@@ -31,7 +31,6 @@
 11. [Security Model](#security-model)
 12. [Verification Checklist](#verification-checklist)
 13. [Troubleshooting](#troubleshooting)
-14. [Instructions for Claude Code](#instructions-for-claude-code)
 
 ---
 
