@@ -6,6 +6,17 @@
 
 ---
 
+## Screenshots
+
+| Login | Dashboard |
+|-------|-----------|
+| ![Login](screenshots/login.png) | ![Dashboard](screenshots/dashboard.png) |
+
+![Editor](screenshots/editor.png)
+*Editor with sandboxed code execution, real-time collaboration, and AI panel*
+
+---
+
 ## Table of Contents
 1. [What This Is](#what-this-is)
 2. [Tech Stack](#tech-stack)
@@ -321,18 +332,6 @@ There is no trusted code. Never bypass the container.
 **Code execution fails immediately** — the runner image wasn't built. Run `docker build -t codesync-runner runner/` (Step 2).
 
 **Port conflicts** — see [Service Ports](#service-ports) and change occupied ones in `.env`/compose.
-
----
-
-## Instructions for Claude Code
-
-If continuing development with Claude Code:
-
-1. **No paid or external model APIs.** AI calls go only to local Ollama.
-2. **Treat all user-submitted code as untrusted.** Never run it outside the isolated runner container.
-3. **Keep services decoupled** — communicate over REST/WebSocket per the architecture, not shared in-process code.
-4. **Typed and documented** — strong typing throughout (TS, Java, Python hints); comment non-obvious logic.
-5. **Verify before claiming done** — each change should be runnable and checked against the Verification Checklist.
 
 ---
 
