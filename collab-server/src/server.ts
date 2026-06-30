@@ -133,18 +133,20 @@ function wireToRedis(room: Room): void {
 
 // Redis message → apply to local doc + broadcast to local clients
 sub.on('messageBuffer', (channelBuf: Buffer, dataBuf: Buffer) => {
-  const channel  = channelBuf.toString()
-  const roomName = channel.replace(/^collab:/, '')
-  const room     = rooms.get(roomName)
-  if (!room) return
+  try {
+    const channel  = channelBuf.toString()
+    const roomName = channel.replace(/^collab:/, '')
+    const room     = rooms.get(roomName)
+    if (!room) return
 
-  const update = new Uint8Array(dataBuf)
-  room.fromRedis = true
-  Y.applyUpdate(room.doc, update, 'redis')  // Yjs deduplicates; safe to re-apply
-  room.fromRedis = false
-  // doc.on('update') is skipped because fromRedis=true guards it,
-  // so we broadcast manually to local peers here.
-  room.broadcast(syncUpdateMsg(update))
+    const update = new Uint8Array(dataBuf)
+    room.fromRedis = true
+    Y.applyUpdate(room.doc, update, 'redis')  // Yjs deduplicates; safe to re-apply
+    room.fromRedis = false
+    room.broadcast(syncUpdateMsg(update))
+  } catch (err) {
+    console.error('[Redis] messageBuffer error:', (err as Error).message)
+  }
 })
 
 // ── Connection handler ────────────────────────────────────────────────────────
@@ -172,7 +174,7 @@ function handleConnection(ws: WebSocket, req: IncomingMessage): void {
   {
     const e = enc.createEncoder()
     enc.writeVarUint(e, MSG_SYNC)
-    syncProtocol.writeSyncStep2(e, room.doc, new Uint8Array())  // empty SV = everything
+    syncProtocol.writeSyncStep2(e, room.doc, undefined)  // undefined = send full doc state
     if (enc.length(e) > 1) ship(ws, enc.toUint8Array(e))
   }
 
