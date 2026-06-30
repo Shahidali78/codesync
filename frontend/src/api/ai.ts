@@ -22,11 +22,14 @@ export async function callAi(action: AiAction, code: string, language: string, o
     const { done, value } = await reader.read()
     if (done) break
     const chunk = decoder.decode(value, { stream: true })
-    // Strip SSE "data: " prefix if present
-    const text = chunk.replace(/^data:\s*/gm, '').replace(/\n\n/g, '\n').trim()
-    if (text) {
-      full += text
-      onChunk(text)
+    for (const line of chunk.split('\n')) {
+      if (line.startsWith('data: ')) {
+        const text = line.slice(6)  // preserve spaces within tokens
+        if (text && text !== '[DONE]') {
+          full += text
+          onChunk(text)
+        }
+      }
     }
   }
 
