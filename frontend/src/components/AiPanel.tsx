@@ -84,9 +84,14 @@ export default function AiPanel({ selectedCode, language, onClose }: Props) {
         {/* Hint when nothing is happening */}
         {!loading && !response && !error && (
           <div className="ai-stub-notice">
-            Select code in the editor, then choose an action.<br /><br />
-            Powered by <strong>qwen2.5-coder</strong> via Ollama.<br />
-            Start the <code>ai-service</code> to activate.
+            <div className="ai-stub-icon">✦</div>
+            <div>
+              <strong>AI Code Assistant</strong>
+              Select code in the editor, then choose an action.
+            </div>
+            <div style={{ fontSize: 11.5, color: 'var(--text-subtle)', marginTop: 4 }}>
+              Powered by <strong style={{ color: 'var(--text-muted)' }}>qwen2.5-coder</strong> via Ollama
+            </div>
           </div>
         )}
       </div>

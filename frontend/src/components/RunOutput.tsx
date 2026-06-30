@@ -10,7 +10,7 @@ export default function RunOutput({ result, running, onClose }: Props) {
   return (
     <div className="output-panel">
       <div className="output-panel-header">
-        <span>Output</span>
+        <span style={{ textTransform: 'uppercase', letterSpacing: '.13em', fontSize: 11 }}>Output</span>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
           {result && (
             <span className={`exit-badge ${result.exitCode === 0 ? 'exit-0' : 'exit-err'}`}>

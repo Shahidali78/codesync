@@ -299,7 +299,10 @@ export default function EditorPage() {
             <div className="collab-status">
               <span
                 className="collab-indicator"
-                style={{ background: isConnected ? 'var(--success)' : 'var(--text-muted)' }}
+                style={{
+                  background: isConnected ? 'var(--success)' : 'var(--text-muted)',
+                  animation: isConnected ? 'pulse 2s infinite' : 'none',
+                }}
                 title={isConnected ? 'Connected to collab server' : 'Connecting…'}
               />
               <span className="collab-label">Live</span>
@@ -340,9 +343,14 @@ export default function EditorPage() {
             {running ? <><span className="spinner" /> Running…</> : '▶ Run'}
           </button>
           <button
-            className={`btn ${showAi ? 'btn-primary' : 'btn-secondary'}`}
+            className="btn btn-secondary"
             onClick={() => setShowAi((v) => !v)}
             title="Toggle AI panel"
+            style={showAi ? {
+              background: 'linear-gradient(135deg,rgba(99,102,241,.25),rgba(139,92,246,.18))',
+              borderColor: 'rgba(139,92,246,.45)',
+              color: '#c4b5fd',
+            } : undefined}
           >
             ✦ AI
           </button>
@@ -390,7 +398,7 @@ export default function EditorPage() {
                 onMount={handleEditorMount}
                 options={{
                   fontSize: 14,
-                  fontFamily: "'Cascadia Code', 'Consolas', 'Courier New', monospace",
+                  fontFamily: "'JetBrains Mono', 'Cascadia Code', 'Consolas', monospace",
                   fontLigatures: true,
                   minimap: { enabled: false },
                   scrollBeyondLastLine: false,
