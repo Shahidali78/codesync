@@ -2,7 +2,6 @@
 
 > A browser-based IDE where multiple users edit, run, and debug code together in real time, with a self-hosted **Qwen2.5-Coder** assistant that reviews, explains, and fixes code inline. **No paid APIs** — all AI runs locally via Ollama.
 
-**Status:** ✅ All 7 build phases complete. This README is both the project documentation and the run guide.
 
 ---
 
