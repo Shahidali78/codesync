@@ -66,6 +66,11 @@ Everything is free and self-hosted. The only model provider is **Ollama** runnin
 
 ## Architecture
 
+![Architecture](screenshots/architecture.png)
+
+<details>
+<summary>ASCII fallback</summary>
+
 ```
                           ┌──────────────────┐
                           │  React (TS) SPA  │
@@ -98,6 +103,8 @@ Everything is free and self-hosted. The only model provider is **Ollama** runnin
                                          │Postgres│
                                          └────────┘
 ```
+
+</details>
 
 ---
 
