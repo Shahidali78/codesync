@@ -92,7 +92,8 @@ function ship(ws: WebSocket, msg: Uint8Array): void {
 
 // Subscriber uses returnBuffers so binary Yjs updates arrive intact.
 const pub = new Redis(REDIS_URL, { lazyConnect: true })
-const sub = new Redis(REDIS_URL, { lazyConnect: true, returnBuffers: true })
+// returnBuffers works at runtime in ioredis v5 but was dropped from the types
+const sub = new Redis(REDIS_URL, { lazyConnect: true, returnBuffers: true } as any)
 
 async function connectRedis(): Promise<void> {
   try {

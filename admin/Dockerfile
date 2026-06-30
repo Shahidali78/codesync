@@ -1,6 +1,7 @@
 FROM php:8.2-cli-alpine
 
-RUN docker-php-ext-install pdo pdo_pgsql \
+RUN apk add --no-cache libpq-dev \
+ && docker-php-ext-install pdo pdo_pgsql \
  && rm -rf /tmp/pear
 
 WORKDIR /app

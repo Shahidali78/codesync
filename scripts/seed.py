@@ -185,7 +185,7 @@ def main():
     ap.add_argument("--api", default="http://localhost:8080",
                     help="Base URL of the Spring Boot API (default: http://localhost:8080)")
     ap.add_argument("--username", default="demo", help="Demo username (default: demo)")
-    ap.add_argument("--password", default="demo123", help="Demo password (default: demo123)")
+    ap.add_argument("--password", default="demo1234", help="Demo password (default: demo1234)")
     ap.add_argument("--email",    default="demo@codesync.local")
     args = ap.parse_args()
 

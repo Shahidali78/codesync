@@ -145,7 +145,7 @@ export default function EditorPage() {
       setFiles((prev) => prev.map((f) => f.id === updated.id ? updated : f))
       if (sessionId) setCollabDirty(false)
     } catch {
-      setError('Save failed.')
+      alert('Save failed. Please try again.')
     } finally {
       setSaving(false)
     }
@@ -187,7 +187,7 @@ export default function EditorPage() {
       const result = await runCode(runnerLang, getCurrentContent())
       setRunResult(result)
     } catch {
-      setError('Execution request failed. Is the API running?')
+      setRunResult({ stdout: '', stderr: 'Execution request failed. Is the API running?', exitCode: -1, durationMs: 0 })
     } finally {
       setRunning(false)
     }

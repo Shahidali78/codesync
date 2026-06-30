@@ -17,6 +17,7 @@ public class ProjectService {
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
 
+    @Transactional(readOnly = true)
     public List<ProjectResponse> listForUser(String username) {
         User user = getUser(username);
         return projectRepository.findByOwnerIdOrderByUpdatedAtDesc(user.getId())
@@ -25,6 +26,7 @@ public class ProjectService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
     public ProjectResponse getById(Long id, String username) {
         User user = getUser(username);
         Project project = projectRepository.findByIdAndOwnerId(id, user.getId())

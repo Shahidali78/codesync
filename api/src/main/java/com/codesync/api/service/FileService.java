@@ -17,12 +17,14 @@ public class FileService {
     private final FileRepository fileRepository;
     private final ProjectService projectService;
 
+    @Transactional(readOnly = true)
     public List<FileResponse> listForProject(Long projectId, String username) {
         projectService.requireOwned(projectId, username);
         return fileRepository.findByProjectIdOrderByNameAsc(projectId)
                 .stream().map(FileResponse::from).toList();
     }
 
+    @Transactional(readOnly = true)
     public FileResponse getById(Long projectId, Long fileId, String username) {
         projectService.requireOwned(projectId, username);
         CodeFile file = fileRepository.findByIdAndProjectId(fileId, projectId)
